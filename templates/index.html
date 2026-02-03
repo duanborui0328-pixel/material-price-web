@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>印尼电商物料价格查询</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+<h2>印尼 Shopee / TikTok 物料价格查询</h2>
+
+<form method="post">
+    <input style="width:300px" type="text" name="keyword"
+           placeholder="输入中文或英文物料描述"
+           value="{{ keyword }}" required>
+    <button type="submit">查询</button>
+</form>
+
+{% if data %}
+<br>
+<a href="/download">📥 下载 Excel</a>
+
+<table>
+    <tr>
+        <th>输入描述</th>
+        <th>语言</th>
+        <th>平台</th>
+        <th>商品名称</th>
+        <th>图片</th>
+        <th>价格（IDR）</th>
+    </tr>
+    {% for d in data %}
+    <tr>
+        <td>{{ d.input_desc }}</td>
+        <td>{{ d.lang }}</td>
+        <td>{{ d.platform }}</td>
+        <td>{{ d.title }}</td>
+        <td><img src="{{ d.image }}"></td>
+        <td>{{ d.price_idr }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+</body>
+</html>
